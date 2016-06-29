@@ -9,6 +9,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.astuetz.PagerSlidingTabStrip;
 import com.codepath.apps.SimpleTweets.fragments.HomeTimelineFragment;
@@ -52,6 +53,11 @@ public class TimelineActivity extends AppCompatActivity {
         Intent i = new Intent(this, ProfileActivity.class);
         startActivity(i);
 
+    }
+
+    public void onProfileView(View view) {
+        Intent i = new Intent(this, ProfileActivity.class);
+        startActivity(i);
     }
 
     // Returns the order of the fragments in the view pager

@@ -14,6 +14,7 @@ import com.loopj.android.http.JsonHttpResponseHandler;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONObject;
+import org.parceler.Parcels;
 
 import cz.msebera.android.httpclient.Header;
 import jp.wasabeef.picasso.transformations.RoundedCornersTransformation;
@@ -28,16 +29,22 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
         client = TwitterApplication.getRestClient();
         // Get account info
-        client.getUserInfo(new JsonHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                user = User.fromJson(response);
-                // My current user account's info
-                getSupportActionBar().setTitle("@" + user.getScreenName());
-                populateProfileHeader(user);
-            }
+        if (getIntent().getParcelableExtra("user") == null) {
+            client.getUserInfo(new JsonHttpResponseHandler() { // Async runs in the background, then goes to onSuccess.
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                    user = User.fromJson(response);
+                    // My current user account's info
+                    getSupportActionBar().setTitle("@" + user.getScreenName());
+                    populateProfileHeader(user);
+                }
 
-        });
+            });
+        } else {
+            user = Parcels.unwrap(getIntent().getParcelableExtra("user"));
+            getSupportActionBar().setTitle("@" + user.getScreenName());
+            populateProfileHeader(user);
+        }
 
         // Get the screen name from the activity that launches this
         String screenName = getIntent().getStringExtra("screen_name");
