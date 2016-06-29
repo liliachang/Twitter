@@ -30,6 +30,5 @@
         android:id="@+id/tvBody"
         android:layout_below="@+id/tvUserName"
         android:layout_toRightOf="@+id/ivProfileImage"
-        android:layout_toEndOf="@+id/ivProfileImage"
-        android:layout_alignBottom="@+id/ivProfileImage" />
+        android:layout_toEndOf="@+id/ivProfileImage" />
 </RelativeLayout>
