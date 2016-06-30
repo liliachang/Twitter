@@ -2,7 +2,7 @@ package com.codepath.apps.SimpleTweets;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -57,11 +57,18 @@ public class ProfileActivity extends AppCompatActivity {
         // Get the screen name from the activity that launches this
 
         if (savedInstanceState == null) {
-            // Crate the user timeline fragment
+            /*// Crate the user timeline fragment
             //UserTimelineFragment fragmentUserTimeline = UserTimelineFragment.newInstance(screenName);
             // Display user fragment within this activity (dynamically)
             FragmentManager fm = getSupportFragmentManager();
-            fragmentUserTimeline = (UserTimelineFragment) fm.findFragmentById(R.id.fgUserTweets);
+            fragmentUserTimeline = (UserTimelineFragment) fm.findFragmentById(R.id.fgUserTweets);*/
+
+            // Create the user timeline fragment
+            fragmentUserTimeline = UserTimelineFragment.newInstance(screenName);
+            // Display user fragment within this activity (dynamically)
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.flContainer, fragmentUserTimeline);
+            ft.commit(); // changes the fragments
         }
     }
 

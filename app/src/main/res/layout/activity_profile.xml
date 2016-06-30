@@ -65,15 +65,14 @@
 
     </LinearLayout>
 
-    <fragment
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:name="com.codepath.apps.SimpleTweets.fragments.UserTimelineFragment"
-        android:id="@+id/fgUserTweets"
-        android:layout_below="@+id/llCounts"
-        android:layout_alignLeft="@+id/llCounts"
-        android:layout_alignStart="@+id/llCounts"
-        tools:layout="@layout/fragment_tweets_list" />
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/flContainer"
+        android:layout_below="@+id/llCounts">
+    </FrameLayout>
 
 
 </RelativeLayout>
