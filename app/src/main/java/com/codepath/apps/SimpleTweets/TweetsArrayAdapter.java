@@ -49,7 +49,8 @@ public class TweetsArrayAdapter extends ArrayAdapter<Tweet> {
         tvScreenName.setText("@" + tweet.getUser().getScreenName());
         tvBody.setText(tweet.getBody());
         ivProfileImage.setImageResource(android.R.color.transparent);
-        tvRelativeTime.setText(tweet.getRelativeTimeAgo(tweet.getCreatedAt()));
+        String formattedTime = TimeFormatter.getTimeDifference(tweet.getCreatedAt());
+        tvRelativeTime.setText(formattedTime);
         Picasso.with(getContext()).load(tweet.getUser().getProfileImageUrl()).transform(new RoundedCornersTransformation(3, 3)).into(ivProfileImage);
 
         // Opens profile when profile image is clicked

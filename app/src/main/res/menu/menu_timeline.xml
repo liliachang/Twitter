@@ -6,7 +6,7 @@
     <item
         android:id="@+id/miProfile"
         app:showAsAction="ifRoom"
-        android:icon="@drawable/ic_action_name"
+        android:icon="@drawable/ic_profile"
         android:title="Profile"
         android:onClick="onProfileView"
         ></item>
@@ -18,4 +18,16 @@
         android:title="Compose"
         android:onClick="onComposeView">
     </item>
+
+    <item
+        android:id="@+id/miNotifications"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/ic_notification"
+        ></item>
+    <item
+        android:id="@+id/miMessages"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/ic_messages"
+        ></item>
+
 </menu>
