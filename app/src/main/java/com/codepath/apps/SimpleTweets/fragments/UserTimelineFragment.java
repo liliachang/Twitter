@@ -69,4 +69,7 @@ public class UserTimelineFragment extends TweetsListFragment {
     }
 
 
+    public void appendTweet(Tweet tweet) {
+
+    }
 }
