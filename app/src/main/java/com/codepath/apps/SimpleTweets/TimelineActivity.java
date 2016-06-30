@@ -74,6 +74,12 @@ public class TimelineActivity extends AppCompatActivity {
         }
     }
 
+    public void onSearchView(MenuItem item) {
+        Intent i = new Intent(this, SearchActivity.class);
+        startActivity(i);
+    }
+
+
     // Returns the order of the fragments in the view pager
     public class TweetsPagerAdapter extends SmartFragmentStatePagerAdapter {
         final int PAGE_COUNT = 2;

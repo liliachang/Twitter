@@ -17,6 +17,11 @@ public class User {
     private String tagline;
     private int followersCount;
     private int followingsCount;
+    private int statusesCount;
+
+    public int getStatusesCount() {
+        return statusesCount;
+    }
 
     public String getTagline() {
         return tagline;
@@ -56,6 +61,7 @@ public class User {
             u.tagline = json.getString("description");
             u.followersCount = json.getInt("followers_count");
             u.followingsCount = json.getInt("friends_count");
+            u.statusesCount = json.getInt("statuses_count");
         } catch (JSONException e) {
             e.printStackTrace();
         }

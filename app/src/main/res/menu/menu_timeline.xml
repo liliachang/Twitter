@@ -3,9 +3,19 @@
     xmlns:tools="https://schemas.android.com/tools"
     tools:context="com.codepath.apps.simpletweets.TimelineActivity">
 
+
+    <item
+        android:id="@+id/miSearch"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_search"
+        android:title="Search"
+        android:onClick="onSearchView"
+        >
+
+    </item>
     <item
         android:id="@+id/miProfile"
-        app:showAsAction="ifRoom"
+        app:showAsAction="always"
         android:icon="@drawable/ic_profile"
         android:title="Profile"
         android:onClick="onProfileView">
@@ -14,7 +24,7 @@
     <item
         android:id="@+id/miCompose"
         android:icon="@drawable/ic_compose"
-        app:showAsAction="ifRoom"
+        app:showAsAction="always"
         android:title="Compose"
         android:onClick="onComposeView">
     </item>
@@ -22,14 +32,15 @@
     <item
         android:id="@+id/miNotifications"
         android:title="Notifications"
-        app:showAsAction="ifRoom"
+        app:showAsAction="always"
         android:icon="@drawable/ic_notification">
     </item>
     <item
         android:id="@+id/miMessages"
-        app:showAsAction="ifRoom"
+        app:showAsAction="always"
         android:title="Messages"
         android:icon="@drawable/ic_messages">
     </item>
+
 
 </menu>

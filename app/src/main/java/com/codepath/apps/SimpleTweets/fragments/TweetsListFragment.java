@@ -20,9 +20,9 @@ import java.util.List;
  */
 public class TweetsListFragment extends Fragment {
 
-    private ArrayList<Tweet> tweets;
-    private TweetsArrayAdapter aTweets;
-    private ListView lvTweets;
+    protected ArrayList<Tweet> tweets;
+    protected TweetsArrayAdapter aTweets;
+    protected ListView lvTweets;
     // private SwipeRefreshLayout swipeContainer;
 
 
@@ -69,24 +69,5 @@ public class TweetsListFragment extends Fragment {
         aTweets.notifyDataSetChanged();
         lvTweets.setSelection(0);
     }
-
-    /*public void fetchTimelineAsync(int page) {
-        // Send the network request to fetch the updated data
-        // `client` here is an instance of Android Async HTTP
-        client.getHomeTimeline(0, new JsonHttpResponseHandler() {
-            public void onSuccess(JSONArray json) {
-                // Remember to CLEAR OUT old items before appending in the new ones
-                aTweets.clear();
-                // ...the data has come back, add new items to your adapter...
-                aTweets.addAll(tweets);
-                // Now we call setRefreshing(false) to signal refresh has finished
-                swipeContainer.setRefreshing(false);
-            }
-
-            public void onFailure(Throwable e) {
-                Log.d("DEBUG", "Fetch timeline error: " + e.toString());
-            }
-        });
-    }*/
 
 }

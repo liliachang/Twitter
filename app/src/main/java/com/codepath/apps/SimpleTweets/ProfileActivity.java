@@ -80,8 +80,8 @@ public class ProfileActivity extends AppCompatActivity {
         ImageView ivProfileImage = (ImageView) findViewById(R.id.ivProfileImage);
         tvName.setText(user.getName());
         tvTagline.setText(user.getTagline());
-        tvFollowers.setText(user.getFollowersCount() + " Followers");
-        tvFollowing.setText(user.getFriendsCount() + " Following");
+        tvFollowers.setText(user.getFollowersCount() + " FOLLOWERS");
+        tvFollowing.setText(user.getFriendsCount() + " FOLLOWING");
         Picasso.with(this).load(user.getProfileImageUrl()).transform(new RoundedCornersTransformation(3, 3)).into(ivProfileImage);
 
     }
