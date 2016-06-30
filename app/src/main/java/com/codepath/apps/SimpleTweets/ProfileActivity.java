@@ -62,7 +62,6 @@ public class ProfileActivity extends AppCompatActivity {
             // Display user fragment within this activity (dynamically)
             FragmentManager fm = getSupportFragmentManager();
             fragmentUserTimeline = (UserTimelineFragment) fm.findFragmentById(R.id.fgUserTweets);
-
         }
     }
 
