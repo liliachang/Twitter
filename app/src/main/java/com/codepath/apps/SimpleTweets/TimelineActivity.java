@@ -4,19 +4,22 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.astuetz.PagerSlidingTabStrip;
 import com.codepath.apps.SimpleTweets.fragments.HomeTimelineFragment;
 import com.codepath.apps.SimpleTweets.fragments.MentionsTimelineFragment;
+import com.codepath.apps.SimpleTweets.models.Tweet;
+
+import org.parceler.Parcels;
 
 public class TimelineActivity extends AppCompatActivity {
 
+    int REQUEST_CODE = 20;
+    SmartFragmentStatePagerAdapter adapterViewPager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,7 +27,8 @@ public class TimelineActivity extends AppCompatActivity {
         // Get the ViewPager
         ViewPager vpPager = (ViewPager) findViewById(R.id.viewpager);
         // Set the viewpager adapter for the pager
-        vpPager.setAdapter(new TweetsPagerAdapter(getSupportFragmentManager()));
+        adapterViewPager = new TweetsPagerAdapter(getSupportFragmentManager());
+        vpPager.setAdapter(adapterViewPager);
         // Find the page tabstrip
         PagerSlidingTabStrip tabStrip = (PagerSlidingTabStrip) findViewById(R.id.tabs);
         // Attach the tabstrip to the viewpager
@@ -55,13 +59,23 @@ public class TimelineActivity extends AppCompatActivity {
 
     }
 
-    public void onProfileView(View view) {
-        Intent i = new Intent(this, ProfileActivity.class);
-        startActivity(i);
+    public void onComposeView(MenuItem mi) {
+        Intent i = new Intent(this, ComposeActivity.class);
+        startActivityForResult(i, REQUEST_CODE);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (data != null) {
+            Tweet tweet = Parcels.unwrap(data.getParcelableExtra("tweet"));
+            HomeTimelineFragment fragmentHomeTweets =
+                    (HomeTimelineFragment) adapterViewPager.getRegisteredFragment(0);
+            fragmentHomeTweets.appendTweet(tweet);
+        }
     }
 
     // Returns the order of the fragments in the view pager
-    public class TweetsPagerAdapter extends FragmentPagerAdapter {
+    public class TweetsPagerAdapter extends SmartFragmentStatePagerAdapter {
         final int PAGE_COUNT = 2;
         private String tabTitles[] = { "Home", "Mentions" };
 
@@ -77,9 +91,7 @@ public class TimelineActivity extends AppCompatActivity {
                 return new HomeTimelineFragment();
             } else if (position == 1) {
                 return new MentionsTimelineFragment();
-            } else {
-                return null;
-            }
+            } else return null;
         }
 
         // Return the tab title

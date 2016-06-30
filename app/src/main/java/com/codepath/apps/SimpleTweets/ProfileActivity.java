@@ -1,7 +1,8 @@
 package com.codepath.apps.SimpleTweets;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentTransaction;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -9,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.codepath.apps.SimpleTweets.fragments.UserTimelineFragment;
+import com.codepath.apps.SimpleTweets.models.Tweet;
 import com.codepath.apps.SimpleTweets.models.User;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.squareup.picasso.Picasso;
@@ -22,6 +24,9 @@ import jp.wasabeef.picasso.transformations.RoundedCornersTransformation;
 public class ProfileActivity extends AppCompatActivity {
     TwitterClient client;
     User user;
+    String screenName;
+    UserTimelineFragment fragmentUserTimeline;
+    int REQUEST_CODE = 20;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +41,7 @@ public class ProfileActivity extends AppCompatActivity {
                     user = User.fromJson(response);
                     // My current user account's info
                     getSupportActionBar().setTitle("@" + user.getScreenName());
+                    screenName = user.getScreenName();
                     populateProfileHeader(user);
                 }
 
@@ -44,17 +50,19 @@ public class ProfileActivity extends AppCompatActivity {
             user = Parcels.unwrap(getIntent().getParcelableExtra("user"));
             getSupportActionBar().setTitle("@" + user.getScreenName());
             populateProfileHeader(user);
+            //screenName = getIntent().getStringExtra("screen_name");
+            screenName = user.getScreenName(); // this does not work either
         }
 
         // Get the screen name from the activity that launches this
-        String screenName = getIntent().getStringExtra("screen_name");
+
         if (savedInstanceState == null) {
             // Crate the user timeline fragment
-            UserTimelineFragment fragmentUserTimeline = UserTimelineFragment.newInstance(screenName);
+            //UserTimelineFragment fragmentUserTimeline = UserTimelineFragment.newInstance(screenName);
             // Display user fragment within this activity (dynamically)
-            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.replace(R.id.flContainer, fragmentUserTimeline);
-            ft.commit(); // changes the fragments
+            FragmentManager fm = getSupportFragmentManager();
+            fragmentUserTimeline = (UserTimelineFragment) fm.findFragmentById(R.id.fgUserTweets);
+
         }
     }
 
@@ -86,4 +94,18 @@ public class ProfileActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
 
     }
+
+    public void onComposeView(MenuItem mi) {
+        Intent i = new Intent(this, ComposeActivity.class);
+        startActivityForResult(i, REQUEST_CODE);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (data != null) {
+            Tweet tweet = Parcels.unwrap(data.getParcelableExtra("tweet"));
+            fragmentUserTimeline.appendTweet(tweet);
+        }
+    }
+
 }

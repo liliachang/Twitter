@@ -5,6 +5,7 @@ import android.text.format.DateUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.parceler.Parcel;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -20,6 +21,7 @@ import java.util.Locale;
 
  */
     // parse the JSON + store the data, encapsulate state logic or display logic
+    @Parcel
 public class Tweet {
     // list out the attributes
     private String body;

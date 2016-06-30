@@ -3,10 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.codepath.apps.SimpleTweets.ProfileActivity">
 
     <RelativeLayout
@@ -69,11 +65,15 @@
 
     </LinearLayout>
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:id="@+id/flContainer"
-        android:layout_below="@+id/llCounts"></FrameLayout>
+    <fragment
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:name="com.codepath.apps.SimpleTweets.fragments.UserTimelineFragment"
+        android:id="@+id/fgUserTweets"
+        android:layout_below="@+id/llCounts"
+        android:layout_alignLeft="@+id/llCounts"
+        android:layout_alignStart="@+id/llCounts"
+        tools:layout="@layout/fragment_tweets_list" />
+
+
 </RelativeLayout>
