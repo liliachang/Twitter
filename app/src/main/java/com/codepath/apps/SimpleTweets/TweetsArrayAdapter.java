@@ -2,6 +2,7 @@ package com.codepath.apps.SimpleTweets;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,6 +51,7 @@ public class TweetsArrayAdapter extends ArrayAdapter<Tweet> {
         tvBody.setText(tweet.getBody());
         ivProfileImage.setImageResource(android.R.color.transparent);
         String formattedTime = TimeFormatter.getTimeDifference(tweet.getCreatedAt());
+        Log.d("DEBUG", formattedTime);
         tvRelativeTime.setText(formattedTime);
         Picasso.with(getContext()).load(tweet.getUser().getProfileImageUrl()).transform(new RoundedCornersTransformation(3, 3)).into(ivProfileImage);
 
